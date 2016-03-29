@@ -14,6 +14,14 @@
 		7D2E702F1CAB262300421BE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E702D1CAB262300421BE9 /* Main.storyboard */; };
 		7D2E70311CAB262300421BE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E70301CAB262300421BE9 /* Assets.xcassets */; };
 		7D2E70341CAB262300421BE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E70321CAB262300421BE9 /* LaunchScreen.storyboard */; };
+		7D2E70401CAB27AC00421BE9 /* Tileset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D2E703F1CAB27AC00421BE9 /* Tileset.plist */; };
+		7D2E70491CAB2F0500421BE9 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E70481CAB2F0500421BE9 /* CameraManager.swift */; };
+		7D2E704B1CAB2F7400421BE9 /* GridLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E704A1CAB2F7400421BE9 /* GridLayer.swift */; };
+		7D2E704D1CAB2F8900421BE9 /* SpriteLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E704C1CAB2F8900421BE9 /* SpriteLayer.swift */; };
+		7D2E704F1CAB2FB000421BE9 /* Tileset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E704E1CAB2FB000421BE9 /* Tileset.swift */; };
+		7D2E70511CAB2FBE00421BE9 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E70501CAB2FBE00421BE9 /* Tile.swift */; };
+		7D2E70531CAB300A00421BE9 /* IsometricTilemap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E70521CAB300A00421BE9 /* IsometricTilemap.swift */; };
+		7D49E6A71CAB4D70001897F2 /* TerrainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D49E6A61CAB4D70001897F2 /* TerrainManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,14 @@
 		7D2E70301CAB262300421BE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D2E70331CAB262300421BE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D2E70351CAB262300421BE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D2E703F1CAB27AC00421BE9 /* Tileset.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Tileset.plist; sourceTree = "<group>"; };
+		7D2E70481CAB2F0500421BE9 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		7D2E704A1CAB2F7400421BE9 /* GridLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayer.swift; sourceTree = "<group>"; };
+		7D2E704C1CAB2F8900421BE9 /* SpriteLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteLayer.swift; sourceTree = "<group>"; };
+		7D2E704E1CAB2FB000421BE9 /* Tileset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tileset.swift; sourceTree = "<group>"; };
+		7D2E70501CAB2FBE00421BE9 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		7D2E70521CAB300A00421BE9 /* IsometricTilemap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsometricTilemap.swift; sourceTree = "<group>"; };
+		7D49E6A61CAB4D70001897F2 /* TerrainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +74,48 @@
 		7D2E70241CAB262300421BE9 /* UnnamedSimulatorGame */ = {
 			isa = PBXGroup;
 			children = (
+				7D2E70581CAB349300421BE9 /* Game */,
 				7D2E70251CAB262300421BE9 /* AppDelegate.swift */,
-				7D2E70271CAB262300421BE9 /* GameScene.sks */,
-				7D2E70291CAB262300421BE9 /* GameScene.swift */,
-				7D2E702B1CAB262300421BE9 /* GameViewController.swift */,
 				7D2E702D1CAB262300421BE9 /* Main.storyboard */,
 				7D2E70301CAB262300421BE9 /* Assets.xcassets */,
 				7D2E70321CAB262300421BE9 /* LaunchScreen.storyboard */,
 				7D2E70351CAB262300421BE9 /* Info.plist */,
 			);
 			path = UnnamedSimulatorGame;
+			sourceTree = "<group>";
+		};
+		7D2E70561CAB347100421BE9 /* TilemapKit */ = {
+			isa = PBXGroup;
+			children = (
+				7D2E704A1CAB2F7400421BE9 /* GridLayer.swift */,
+				7D2E70521CAB300A00421BE9 /* IsometricTilemap.swift */,
+				7D2E704C1CAB2F8900421BE9 /* SpriteLayer.swift */,
+				7D2E704E1CAB2FB000421BE9 /* Tileset.swift */,
+				7D2E70501CAB2FBE00421BE9 /* Tile.swift */,
+			);
+			name = TilemapKit;
+			sourceTree = "<group>";
+		};
+		7D2E70571CAB347E00421BE9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7D2E70481CAB2F0500421BE9 /* CameraManager.swift */,
+				7D49E6A61CAB4D70001897F2 /* TerrainManager.swift */,
+				7D2E70561CAB347100421BE9 /* TilemapKit */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		7D2E70581CAB349300421BE9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				7D2E70571CAB347E00421BE9 /* Managers */,
+				7D2E70271CAB262300421BE9 /* GameScene.sks */,
+				7D2E70291CAB262300421BE9 /* GameScene.swift */,
+				7D2E702B1CAB262300421BE9 /* GameViewController.swift */,
+				7D2E703F1CAB27AC00421BE9 /* Tileset.plist */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D2E70281CAB262300421BE9 /* GameScene.sks in Resources */,
+				7D2E70401CAB27AC00421BE9 /* Tileset.plist in Resources */,
 				7D2E70341CAB262300421BE9 /* LaunchScreen.storyboard in Resources */,
 				7D2E70311CAB262300421BE9 /* Assets.xcassets in Resources */,
 				7D2E702F1CAB262300421BE9 /* Main.storyboard in Resources */,
@@ -143,8 +192,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D2E702A1CAB262300421BE9 /* GameScene.swift in Sources */,
+				7D49E6A71CAB4D70001897F2 /* TerrainManager.swift in Sources */,
+				7D2E704B1CAB2F7400421BE9 /* GridLayer.swift in Sources */,
+				7D2E704F1CAB2FB000421BE9 /* Tileset.swift in Sources */,
+				7D2E70511CAB2FBE00421BE9 /* Tile.swift in Sources */,
 				7D2E702C1CAB262300421BE9 /* GameViewController.swift in Sources */,
+				7D2E70491CAB2F0500421BE9 /* CameraManager.swift in Sources */,
+				7D2E704D1CAB2F8900421BE9 /* SpriteLayer.swift in Sources */,
 				7D2E70261CAB262300421BE9 /* AppDelegate.swift in Sources */,
+				7D2E70531CAB300A00421BE9 /* IsometricTilemap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +317,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qwyck.UnnamedSimulatorGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -272,6 +329,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qwyck.UnnamedSimulatorGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -294,6 +352,7 @@
 				7D2E703A1CAB262300421BE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
