@@ -27,7 +27,7 @@ class CameraManager {
         let newY = camera.position.y - (location.y - previousLocation.y)
         let newX = camera.position.x - (location.x - previousLocation.x)
         
-        let position = CGPoint(x: newY, y: newX)
+        let position = CGPoint(x: newX, y: newY)
         let tilemapPosition = tilemap.pointForPosition(position)
         
         if tilemapPosition.x >= 0.0 && tilemapPosition.x <= tilemap.mapSize.width {
@@ -41,7 +41,7 @@ class CameraManager {
         var deltaScale: CGFloat
         
         deltaScale = 1 - (previousScale - scale)
-        deltaScale = min(deltaScale, 1.75 / camera.xScale)
+        deltaScale = min(deltaScale, 3.0 / camera.xScale)
         deltaScale = max(deltaScale, 0.6 / camera.xScale)
         
         let newScale = camera.xScale * deltaScale
