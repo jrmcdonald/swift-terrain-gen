@@ -24,7 +24,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         
         let tileset = Tileset(tilemap: tilemap, filename: "Tileset")
         
-        let terrainData = TerrainManager.generateTerrain(mapSize)
+        let terrainData = LevelManager.generateTerrain(mapSize)
         let terrainLayer = SpriteLayer(tilemap: tilemap, data: terrainData, tileset: tileset)
         terrainLayer.zPosition = -1
         tilemap.addChild(terrainLayer)
@@ -54,7 +54,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         guard let touch = touches.first else {
             return
         }
-//        let tilemapPosition = touch.locationInNode(tilemap)
+        let tilemapPosition = touch.locationInNode(tilemap)
 //        print(tilemap.pointForPosition(tilemapPosition))
         //        highlight.position = tilemap.positionForPoint(tilemap.pointForPosition(tilemapPosition))
     }

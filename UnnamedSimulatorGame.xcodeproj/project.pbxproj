@@ -21,7 +21,8 @@
 		7D2E704F1CAB2FB000421BE9 /* Tileset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E704E1CAB2FB000421BE9 /* Tileset.swift */; };
 		7D2E70511CAB2FBE00421BE9 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E70501CAB2FBE00421BE9 /* Tile.swift */; };
 		7D2E70531CAB300A00421BE9 /* IsometricTilemap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2E70521CAB300A00421BE9 /* IsometricTilemap.swift */; };
-		7D49E6A71CAB4D70001897F2 /* TerrainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D49E6A61CAB4D70001897F2 /* TerrainManager.swift */; };
+		7D49E6A71CAB4D70001897F2 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D49E6A61CAB4D70001897F2 /* LevelManager.swift */; };
+		7D49E6AA1CAC62A2001897F2 /* SimplexNoise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D49E6A91CAC62A2001897F2 /* SimplexNoise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +42,8 @@
 		7D2E704E1CAB2FB000421BE9 /* Tileset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tileset.swift; sourceTree = "<group>"; };
 		7D2E70501CAB2FBE00421BE9 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		7D2E70521CAB300A00421BE9 /* IsometricTilemap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsometricTilemap.swift; sourceTree = "<group>"; };
-		7D49E6A61CAB4D70001897F2 /* TerrainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainManager.swift; sourceTree = "<group>"; };
+		7D49E6A61CAB4D70001897F2 /* LevelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
+		7D49E6A91CAC62A2001897F2 /* SimplexNoise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplexNoise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				7D2E70481CAB2F0500421BE9 /* CameraManager.swift */,
-				7D49E6A61CAB4D70001897F2 /* TerrainManager.swift */,
-				7D2E70561CAB347100421BE9 /* TilemapKit */,
+				7D49E6A61CAB4D70001897F2 /* LevelManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -110,12 +111,22 @@
 			isa = PBXGroup;
 			children = (
 				7D2E70571CAB347E00421BE9 /* Managers */,
+				7D2E70561CAB347100421BE9 /* TilemapKit */,
+				7D49E6A81CAC6289001897F2 /* Utils */,
 				7D2E70271CAB262300421BE9 /* GameScene.sks */,
 				7D2E70291CAB262300421BE9 /* GameScene.swift */,
 				7D2E702B1CAB262300421BE9 /* GameViewController.swift */,
 				7D2E703F1CAB27AC00421BE9 /* Tileset.plist */,
 			);
 			name = Game;
+			sourceTree = "<group>";
+		};
+		7D49E6A81CAC6289001897F2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7D49E6A91CAC62A2001897F2 /* SimplexNoise.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,12 +203,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D2E702A1CAB262300421BE9 /* GameScene.swift in Sources */,
-				7D49E6A71CAB4D70001897F2 /* TerrainManager.swift in Sources */,
+				7D49E6A71CAB4D70001897F2 /* LevelManager.swift in Sources */,
 				7D2E704B1CAB2F7400421BE9 /* GridLayer.swift in Sources */,
 				7D2E704F1CAB2FB000421BE9 /* Tileset.swift in Sources */,
 				7D2E70511CAB2FBE00421BE9 /* Tile.swift in Sources */,
 				7D2E702C1CAB262300421BE9 /* GameViewController.swift in Sources */,
 				7D2E70491CAB2F0500421BE9 /* CameraManager.swift in Sources */,
+				7D49E6AA1CAC62A2001897F2 /* SimplexNoise.swift in Sources */,
 				7D2E704D1CAB2F8900421BE9 /* SpriteLayer.swift in Sources */,
 				7D2E70261CAB262300421BE9 /* AppDelegate.swift in Sources */,
 				7D2E70531CAB300A00421BE9 /* IsometricTilemap.swift in Sources */,

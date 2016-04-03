@@ -10,9 +10,14 @@
 	<key>1</key>
 	<dict>
 		<key>imageName</key>
-		<string>iso_outside_ground</string>
+		<string>iso_outside_water</string>
 	</dict>
 	<key>2</key>
+	<dict>
+		<key>imageName</key>
+		<string>iso_outside_ground</string>
+	</dict>
+	<key>3</key>
 	<dict>
 		<key>imageName</key>
 		<string>iso_outside_rock</string>
