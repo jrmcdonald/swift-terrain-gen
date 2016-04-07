@@ -56,8 +56,8 @@ class SimplexNoise {
         49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
         138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180]
     
-    private var perm : [Int] = Array(count: 512, repeatedValue: 0)
-    private var permMod12 : [Int] = Array(count: 512, repeatedValue: 0)
+    private var perm = Array(count: 512, repeatedValue: 0)
+    private var permMod12 = Array(count: 512, repeatedValue: 0)
     
     init() {
         for i in 0..<512 {
@@ -66,32 +66,32 @@ class SimplexNoise {
         }
     }
     
-    private let F2 : Double = 0.5 * (sqrt(3.0) - 1.0)
-    private let G2 : Double = (3.0 - sqrt(3.0)) / 6.0
+    private let F2 = 0.5 * (sqrt(3.0) - 1.0)
+    private let G2 = (3.0 - sqrt(3.0)) / 6.0
     
     private func dot(g: Grad, x: Double, y: Double) -> Double {
         return g.x * x + g.y * y
     }
     
     private func fastfloor(x: Double) -> Int {
-        let xi : Int = Int(x)
+        let xi = Int(x)
         return x < Double(xi) ? xi - 1 : xi
     }
     
     func generatedNoise(chunk: CGPoint, octaves: Int, roughness: Double, scale: Double) -> [[Double]] {
-        let width : Int = Int(MapConstants.chunkSize.width)
-        let height : Int = Int(MapConstants.chunkSize.height)
+        let width = Int(MapConstants.chunkSize.width)
+        let height = Int(MapConstants.chunkSize.height)
         
-        var noise : [[Double]] = Array(count: width, repeatedValue: Array(count: height, repeatedValue: 0.0))
+        var noise = Array(count: width, repeatedValue: Array(count: height, repeatedValue: 0.0))
         
-        var layerFrequency : Double = scale
-        var layerWeight : Double = 1
-        var weightSum : Double = 0
+        var layerFrequency = scale
+        var layerWeight = 1.0
+        var weightSum = 0.0
         
         for _ in 0..<octaves {
             for i in 0..<noise.count {
                 for j in 0..<noise[i].count {
-                    let chunkPos : CGPoint = IsometricTilemap.translateFromChunkPosition(CGPoint(x: j, y: i), chunk: chunk)
+                    let chunkPos = IsometricTilemap.translateFromChunkPosition(CGPoint(x: j, y: i), chunk: chunk)
                     noise[i][j] = noise2d(Double(chunkPos.x) * layerFrequency, y: Double(chunkPos.y) * layerFrequency) * layerWeight
                 }
             }
@@ -114,17 +114,17 @@ class SimplexNoise {
         var n0, n1, n2: Double // noise from the three corners
         
         // skew the input space to determine the current simplex cell
-        let s : Double = (x + y) * F2 // hairy factor for 2D
-        let i : Int = fastfloor(x + s)
-        let j : Int = fastfloor(y + s)
-        let t : Double = Double(i + j) * G2
+        let s = (x + y) * F2 // hairy factor for 2D
+        let i = fastfloor(x + s)
+        let j = fastfloor(y + s)
+        let t = Double(i + j) * G2
         
         // unskew the cell origins back to (x,y) space and 
         // calculate the x/y distances from the cell origin
-        let xorigin : Double = Double(i) - t
-        let yorigin : Double = Double(j) - t
-        let x0 : Double = x - xorigin
-        let y0 : Double = y - yorigin
+        let xorigin = Double(i) - t
+        let yorigin = Double(j) - t
+        let x0 = x - xorigin
+        let y0 = y - yorigin
         
         // for 2D the simplex shape is an equilateral triangle
         // determine which simplex we are in
@@ -141,20 +141,20 @@ class SimplexNoise {
         // a step of (1,0) in (i,j) means a step of (1-c,-c) in (x,y), and
         // a step of (0,1) in (i,j) means a step of (-c,1-c) in (x,y), where
         // c = (3-sqrt(3))/6
-        let x1 : Double = x0 - Double(i1) + G2 // offsets for middle corner in (x,y) unskewed coords
-        let y1 : Double = y0 - Double(j1) + G2
-        let x2 : Double = x0 - 1.0 + 2.0 * G2 // offsets for the last corner (x,y) unskewed coords
-        let y2 : Double = y0 - 1.0 + 2.0 * G2
+        let x1 = x0 - Double(i1) + G2 // offsets for middle corner in (x,y) unskewed coords
+        let y1 = y0 - Double(j1) + G2
+        let x2 = x0 - 1.0 + 2.0 * G2 // offsets for the last corner (x,y) unskewed coords
+        let y2 = y0 - 1.0 + 2.0 * G2
         
         // work out the hashed gradient indices of the three simplex corners
-        let ii : Int = i & 255
-        let jj : Int = j & 255
-        let gi0 : Int = permMod12[ii + perm[jj]]
-        let gi1 : Int = permMod12[ii + i1 + perm[jj + j1]]
-        let gi2 : Int = permMod12[ii + 1 + perm[jj + 1]]
+        let ii = i & 255
+        let jj = j & 255
+        let gi0 = permMod12[ii + perm[jj]]
+        let gi1 = permMod12[ii + i1 + perm[jj + j1]]
+        let gi2 = permMod12[ii + 1 + perm[jj + 1]]
         
         // calculate the contribution from the three corners
-        var t0 : Double = 0.5 - x0 * x0 - y0 * y0
+        var t0 = 0.5 - x0 * x0 - y0 * y0
         if (t0 < 0) {
             n0 = 0.0
         } else {
@@ -162,7 +162,7 @@ class SimplexNoise {
             n0 = t0 * t0 * dot(grad3[gi0], x: x0, y: y0) // (x,y) of grad3 used for 2D gradient
         }
         
-        var t1 : Double = 0.5 - x1 * x1 - y1 * y1
+        var t1 = 0.5 - x1 * x1 - y1 * y1
         if (t1 < 0) {
             n1 = 0.0
         } else {
@@ -170,7 +170,7 @@ class SimplexNoise {
             n1 = t1 * t1 * dot(grad3[gi1], x: x1, y: y1)
         }
         
-        var t2 : Double = 0.5 - x2 * x2 - y2 * y2
+        var t2 = 0.5 - x2 * x2 - y2 * y2
         if (t2 < 0) {
             n2 = 0.0
         } else {

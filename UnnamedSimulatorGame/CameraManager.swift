@@ -13,7 +13,7 @@ class CameraManager {
     
     let camera: SKCameraNode
     
-    var previousScale: CGFloat = CGFloat(1.0)
+    var previousScale = CGFloat(1.0)
     
     weak var tilemap: IsometricTilemap!
     
@@ -38,9 +38,8 @@ class CameraManager {
     }
     
     func zoomCamera(scale: CGFloat) {
-        var deltaScale: CGFloat
         
-        deltaScale = 1 - (previousScale - scale)
+        var deltaScale = 1 - (previousScale - scale)
         deltaScale = min(deltaScale, MapConstants.minZoom / camera.xScale)
         deltaScale = max(deltaScale, MapConstants.maxZoom / camera.xScale)
         

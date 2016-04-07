@@ -27,22 +27,22 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         tilemap.addChild(terrainLayer)
         
         var nextTerrainData = LevelManager.generateTerrain(CGPoint(x: -1, y: -1))
-        terrainLayer.buildNewChunk(CGPoint(x: -1, y: -1), layerData: nextTerrainData)
+        terrainLayer.buildChunk(CGPoint(x: -1, y: -1), data: nextTerrainData)
         
         nextTerrainData = LevelManager.generateTerrain(CGPoint(x: -1, y: 0))
-        terrainLayer.buildNewChunk(CGPoint(x: -1, y: 0), layerData: nextTerrainData)
+        terrainLayer.buildChunk(CGPoint(x: -1, y: 0), data: nextTerrainData)
         
         nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 0, y: -1))
-        terrainLayer.buildNewChunk(CGPoint(x: 0, y: -1), layerData: nextTerrainData)
+        terrainLayer.buildChunk(CGPoint(x: 0, y: -1), data: nextTerrainData)
         
         nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 1, y: 0))
-        terrainLayer.buildNewChunk(CGPoint(x: 1, y: 0), layerData: nextTerrainData)
+        terrainLayer.buildChunk(CGPoint(x: 1, y: 0), data: nextTerrainData)
         
         nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 0, y: 1))
-        terrainLayer.buildNewChunk(CGPoint(x: 0, y: 1), layerData: nextTerrainData)
+        terrainLayer.buildChunk(CGPoint(x: 0, y: 1), data: nextTerrainData)
         
         nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 1, y: 1))
-        terrainLayer.buildNewChunk(CGPoint(x: 1, y: 1), layerData: nextTerrainData)
+        terrainLayer.buildChunk(CGPoint(x: 1, y: 1), data: nextTerrainData)
         
         cameraManager = CameraManager(position: tilemap.positionForPoint(CGPointZero), tilemap: tilemap)
         camera = cameraManager.camera

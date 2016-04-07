@@ -21,14 +21,14 @@ class LevelManager {
     }
     
     static func generateTerrain(chunk: CGPoint) -> [[Int]] {
-        let width : Int = Int(MapConstants.chunkSize.width)
-        let height: Int = Int(MapConstants.chunkSize.height)
+        let width = Int(MapConstants.chunkSize.width)
+        let height = Int(MapConstants.chunkSize.height)
         
-        var terrain: [[Int]] = Array(count: width, repeatedValue: Array(count: height, repeatedValue: 0))
+        var terrain = Array(count: width, repeatedValue: Array(count: height, repeatedValue: 0))
         
-        let simplex : SimplexNoise = SimplexNoise()
+        let simplex = SimplexNoise()
         
-        let noise : [[Double]] = simplex.generatedNoise(chunk, octaves: 3, roughness: 0.6, scale: 0.008)
+        let noise = simplex.generatedNoise(chunk, octaves: 3, roughness: 0.6, scale: 0.008)
         
         for x in 0..<noise.count {
             for y in 0..<noise[x].count {
