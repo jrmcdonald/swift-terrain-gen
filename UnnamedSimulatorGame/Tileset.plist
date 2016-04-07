@@ -10,12 +10,24 @@
 	<key>1</key>
 	<dict>
 		<key>imageName</key>
-		<string>iso_outside_water</string>
+		<string>iso_outside_ground</string>
+		<key>minHeight</key>
+		<string>0.48</string>
+		<key>maxHeight</key>
+		<string>1.01</string>
+		<key>layer</key>
+		<string>terrain</string>
 	</dict>
 	<key>2</key>
 	<dict>
 		<key>imageName</key>
-		<string>iso_outside_ground</string>
+		<string>iso_outside_water</string>
+		<key>minHeight</key>
+		<string>0.00</string>
+		<key>maxHeight</key>
+		<string>0.48</string>
+		<key>layer</key>
+		<string>terrain</string>
 	</dict>
 	<key>3</key>
 	<dict>

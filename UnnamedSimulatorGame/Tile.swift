@@ -34,4 +34,10 @@ struct Tile {
         
         return node
     }
+    
+    subscript(attribute: String) -> String? {
+        get {
+            return attributes[attribute]
+        }
+    }
 }

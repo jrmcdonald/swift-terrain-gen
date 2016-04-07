@@ -47,6 +47,31 @@ struct Tileset {
         self.tiles = tiles
     }
     
+    func getTileForHeight(height: Double, layer: MapConstants.Layers) -> Int {
+        var tilesInRange = [Int]()
+        
+        for (id, tile) in tiles {
+            guard let tileLayer = tile["layer"],
+                let minAttr = tile["minHeight"],
+                let maxAttr = tile["maxHeight"],
+                let min = Double(minAttr),
+                let max = Double(maxAttr) else {
+                    continue
+            }
+            
+            if tileLayer == layer.rawValue && min..<max ~= height {
+                tilesInRange.append(id)
+            }
+        }
+        
+        if tilesInRange.count > 0 {
+            return tilesInRange[0]
+        } else {
+            print("No tiles matching height value.")
+            return 0
+        }
+    }
+    
     subscript(tileType: Int) -> Tile? {
         get {
             return tiles[tileType]

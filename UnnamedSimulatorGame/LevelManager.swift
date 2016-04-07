@@ -44,15 +44,6 @@ class LevelManager {
         terrainLayer.buildChunk(CGPoint(x: 1, y: 1), data: nextTerrainData)
     }
     
-    func mapTerrainTiles(n: Double) -> Int {
-        switch n {
-        case _ where n <= 0.5:
-            return 1
-        default:
-            return 2
-        }
-    }
-    
     func generateTerrain(chunk: CGPoint) -> [[Int]] {
         let width = Int(MapConstants.chunkSize.width)
         let height = Int(MapConstants.chunkSize.height)
@@ -63,9 +54,9 @@ class LevelManager {
         
         let noise = simplex.generatedNoise(chunk, octaves: 3, roughness: 0.6, scale: 0.008)
         
-        for x in 0..<noise.count {
-            for y in 0..<noise[x].count {
-                terrain[x][y] = mapTerrainTiles(noise[x][y])
+        for i in 0..<noise.count {
+            for j in 0..<noise[i].count {
+                terrain[i][j] = tileset.getTileForHeight(noise[i][j], layer: MapConstants.Layers.Terrain)
             }
         }
                 
