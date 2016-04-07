@@ -12,6 +12,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
     
     var tilemap: IsometricTilemap!
     var cameraManager: CameraManager!
+    var levelManager: LevelManager!
     
     var highlight: SKShapeNode!
     
@@ -19,30 +20,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         tilemap = IsometricTilemap()
         addChild(tilemap)
         
-        let tileset = Tileset(tilemap: tilemap, filename: "Tileset")
-        
-        let terrainData = LevelManager.generateTerrain(CGPointZero)
-        let terrainLayer = SpriteLayer(tilemap: tilemap, data: terrainData, tileset: tileset)
-        terrainLayer.zPosition = -1
-        tilemap.addChild(terrainLayer)
-        
-        var nextTerrainData = LevelManager.generateTerrain(CGPoint(x: -1, y: -1))
-        terrainLayer.buildChunk(CGPoint(x: -1, y: -1), data: nextTerrainData)
-        
-        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: -1, y: 0))
-        terrainLayer.buildChunk(CGPoint(x: -1, y: 0), data: nextTerrainData)
-        
-        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 0, y: -1))
-        terrainLayer.buildChunk(CGPoint(x: 0, y: -1), data: nextTerrainData)
-        
-        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 1, y: 0))
-        terrainLayer.buildChunk(CGPoint(x: 1, y: 0), data: nextTerrainData)
-        
-        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 0, y: 1))
-        terrainLayer.buildChunk(CGPoint(x: 0, y: 1), data: nextTerrainData)
-        
-        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 1, y: 1))
-        terrainLayer.buildChunk(CGPoint(x: 1, y: 1), data: nextTerrainData)
+        levelManager = LevelManager(tilemap: tilemap)
         
         cameraManager = CameraManager(position: tilemap.positionForPoint(CGPointZero), tilemap: tilemap)
         camera = cameraManager.camera
@@ -68,7 +46,7 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         }
         let tilemapPosition = touch.locationInNode(tilemap)
 //        print(tilemap.pointForPosition(tilemapPosition))
-        //        highlight.position = tilemap.positionForPoint(tilemap.pointForPosition(tilemapPosition))
+//        highlight.position = tilemap.positionForPoint(tilemap.pointForPosition(tilemapPosition))
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
