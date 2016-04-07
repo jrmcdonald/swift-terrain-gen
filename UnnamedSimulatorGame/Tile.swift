@@ -27,7 +27,7 @@ struct Tile {
         }
         
         let node = SKSpriteNode(imageNamed: imageName)
-        let ratio = tilemap.tileSize.height / node.size.height
+        let ratio = MapConstants.tileSize.height / node.size.height
         
         node.anchorPoint = CGPoint(x: 0.5, y: 0.5 * ratio)
         node.texture!.filteringMode = .Nearest

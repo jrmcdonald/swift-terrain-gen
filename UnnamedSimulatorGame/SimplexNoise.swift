@@ -33,6 +33,7 @@
  */
 
 import Foundation
+import SpriteKit
 
 class SimplexNoise {
 
@@ -77,16 +78,21 @@ class SimplexNoise {
         return x < Double(xi) ? xi - 1 : xi
     }
     
-    func generatedNoise(height: Int, width: Int, octaves: Int, roughness: Double, scale: Double) -> [[Double]] {
+    func generatedNoise(chunk: CGPoint, octaves: Int, roughness: Double, scale: Double) -> [[Double]] {
+        let width : Int = Int(MapConstants.chunkSize.width)
+        let height : Int = Int(MapConstants.chunkSize.height)
+        
         var noise : [[Double]] = Array(count: width, repeatedValue: Array(count: height, repeatedValue: 0.0))
+        
         var layerFrequency : Double = scale
         var layerWeight : Double = 1
         var weightSum : Double = 0
         
         for _ in 0..<octaves {
-            for x in 0..<noise.count {
-                for y in 0..<noise[x].count {
-                    noise[x][y] = noise2d(Double(x) * layerFrequency, y: Double(y) * layerFrequency) * layerWeight
+            for i in 0..<noise.count {
+                for j in 0..<noise[i].count {
+                    let chunkPos : CGPoint = IsometricTilemap.translateFromChunkPosition(CGPoint(x: j, y: i), chunk: chunk)
+                    noise[i][j] = noise2d(Double(chunkPos.x) * layerFrequency, y: Double(chunkPos.y) * layerFrequency) * layerWeight
                 }
             }
             layerFrequency *= 2
@@ -94,10 +100,10 @@ class SimplexNoise {
             layerWeight *= roughness
         }
         
-        for x in 0..<noise.count {
-            for y in 0..<noise[x].count {
-                noise[x][y] /= weightSum
-                noise[x][y] = (noise[x][y] + 1) / 2
+        for i in 0..<noise.count {
+            for j in 0..<noise[i].count {
+                noise[i][j] /= weightSum
+                noise[i][j] = (noise[i][j] + 1) / 2
             }
         }
     

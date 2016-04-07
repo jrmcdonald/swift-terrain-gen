@@ -12,29 +12,18 @@ import SpriteKit
 class IsometricTilemap: SKNode {
     
     let mapSize: CGSize
-    let tileSize: CGSize
-    
-    private let tileWidth: CGFloat
-    private var tileHeight: CGFloat {
-        get {
-            return floor(tileWidth / 2.0)
-        }
-    }
     
     var tilemapSize: CGSize {
         get {
-            let width = tileWidth * (mapSize.height + mapSize.width) / 2.0
-            let height = tileHeight * (mapSize.height + mapSize.width) / 2.0
+            let width = MapConstants.tileSize.width * (mapSize.height + mapSize.width) / 2.0
+            let height = MapConstants.tileSize.height * (mapSize.height + mapSize.width) / 2.0
             
             return CGSize(width: width, height: height)
         }
     }
     
-    init(mapSize: CGSize, tileWidth: CGFloat) {
-        self.mapSize = mapSize
-        self.tileWidth = tileWidth
-        self.tileSize = CGSize(width: tileWidth, height: floor(tileWidth / 2.0))
-        
+    override init() {
+        self.mapSize = MapConstants.chunkSize
         super.init()
     }
     
@@ -45,18 +34,18 @@ class IsometricTilemap: SKNode {
     func tileShapeNode() -> SKShapeNode {
         let path = CGPathCreateMutable()
         
-        CGPathMoveToPoint(path, nil, 0.0, -tileHeight / 2.0)
-        CGPathAddLineToPoint(path, nil, tileWidth / 2.0, 0.0)
-        CGPathAddLineToPoint(path, nil, 0.0, tileHeight / 2.0)
-        CGPathAddLineToPoint(path, nil, -tileWidth / 2.0, 0.0)
+        CGPathMoveToPoint(path, nil, 0.0, -MapConstants.tileSize.height / 2.0)
+        CGPathAddLineToPoint(path, nil, MapConstants.tileSize.width / 2.0, 0.0)
+        CGPathAddLineToPoint(path, nil, 0.0, MapConstants.tileSize.height / 2.0)
+        CGPathAddLineToPoint(path, nil, -MapConstants.tileSize.width / 2.0, 0.0)
         CGPathCloseSubpath(path)
         
         return SKShapeNode(path: path, centered: true)
     }
     
     func positionForPoint(point: CGPoint) -> CGPoint {
-        let x = (point.x - point.y) * tileWidth / 2.0
-        let y = tilemapSize.height - (point.x + point.y) * tileHeight / 2.0
+        let x = (point.x - point.y) * MapConstants.tileSize.width / 2.0
+        let y = tilemapSize.height - (point.x + point.y) * MapConstants.tileSize.height / 2.0
         
         return CGPoint(x: x, y: y)
     }
@@ -65,12 +54,22 @@ class IsometricTilemap: SKNode {
         let xs = position.x
         let ys = tilemapSize.height - position.y
         
-        let tileWidthHalf = tileWidth / 2.0
-        let tileHeightHalf = tileHeight / 2.0
+        let tileWidthHalf = MapConstants.tileSize.width / 2.0
+        let tileHeightHalf = MapConstants.tileSize.height / 2.0
         
         let x = floor(((xs + tileWidthHalf) / tileWidthHalf + ys / tileHeightHalf) / 2.0)
         let y = floor(((ys + tileHeightHalf) / tileHeightHalf - xs / tileWidthHalf) / 2.0)
         
         return CGPoint(x: x, y: y)
+    }
+    
+    static func translateFromChunkPosition(point: CGPoint, chunk: CGPoint) -> CGPoint {
+        let dX = chunk.x * MapConstants.chunkSize.width
+        let dY = chunk.y * MapConstants.chunkSize.height
+        
+        let x = chunk.x < 0 ? MapConstants.chunkSize.width - (point.x + 1) : point.x
+        let y = chunk.y < 0 ? MapConstants.chunkSize.height - (point.y + 1) : point.y
+        
+        return CGPoint(x: dX + x, y: dY + y)
     }
 }

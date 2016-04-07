@@ -41,8 +41,8 @@ class CameraManager {
         var deltaScale: CGFloat
         
         deltaScale = 1 - (previousScale - scale)
-        deltaScale = min(deltaScale, 3.0 / camera.xScale)
-        deltaScale = max(deltaScale, 0.6 / camera.xScale)
+        deltaScale = min(deltaScale, MapConstants.minZoom / camera.xScale)
+        deltaScale = max(deltaScale, MapConstants.maxZoom / camera.xScale)
         
         let newScale = camera.xScale * deltaScale
         

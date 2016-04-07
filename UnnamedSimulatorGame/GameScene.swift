@@ -10,24 +10,39 @@ import SpriteKit
 
 class GameScene: SKScene, UIGestureRecognizerDelegate {
     
-    var mapSize = CGSize(width: 100.0, height: 100.0)
-    var tileWidth: CGFloat = 64.0
-    
     var tilemap: IsometricTilemap!
     var cameraManager: CameraManager!
     
     var highlight: SKShapeNode!
     
     override func didMoveToView(view: SKView) {
-        tilemap = IsometricTilemap(mapSize: mapSize, tileWidth: tileWidth)
+        tilemap = IsometricTilemap()
         addChild(tilemap)
         
         let tileset = Tileset(tilemap: tilemap, filename: "Tileset")
         
-        let terrainData = LevelManager.generateTerrain(mapSize)
+        let terrainData = LevelManager.generateTerrain(CGPointZero)
         let terrainLayer = SpriteLayer(tilemap: tilemap, data: terrainData, tileset: tileset)
         terrainLayer.zPosition = -1
         tilemap.addChild(terrainLayer)
+        
+        var nextTerrainData = LevelManager.generateTerrain(CGPoint(x: -1, y: -1))
+        terrainLayer.buildNewChunk(CGPoint(x: -1, y: -1), layerData: nextTerrainData)
+        
+        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: -1, y: 0))
+        terrainLayer.buildNewChunk(CGPoint(x: -1, y: 0), layerData: nextTerrainData)
+        
+        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 0, y: -1))
+        terrainLayer.buildNewChunk(CGPoint(x: 0, y: -1), layerData: nextTerrainData)
+        
+        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 1, y: 0))
+        terrainLayer.buildNewChunk(CGPoint(x: 1, y: 0), layerData: nextTerrainData)
+        
+        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 0, y: 1))
+        terrainLayer.buildNewChunk(CGPoint(x: 0, y: 1), layerData: nextTerrainData)
+        
+        nextTerrainData = LevelManager.generateTerrain(CGPoint(x: 1, y: 1))
+        terrainLayer.buildNewChunk(CGPoint(x: 1, y: 1), layerData: nextTerrainData)
         
         cameraManager = CameraManager(position: tilemap.positionForPoint(CGPointZero), tilemap: tilemap)
         camera = cameraManager.camera
@@ -36,9 +51,6 @@ class GameScene: SKScene, UIGestureRecognizerDelegate {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: .handlePinch)
         pinchGesture.delegate = self
         self.view?.addGestureRecognizer(pinchGesture)
-        
-        //        let gridLayer = GridLayer(tilemap: tilemap)
-        //        tilemap.addChild(gridLayer)
     }
     
     func handlePinch(sender: UIPinchGestureRecognizer) {

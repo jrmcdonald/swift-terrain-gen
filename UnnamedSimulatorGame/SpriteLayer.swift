@@ -13,21 +13,27 @@ class SpriteLayer: SKNode {
     
     weak var tilemap: IsometricTilemap!
     
-    let layerData: [[Int]]
+    var chunkedLayerData: [CGPoint: [[Int]]]
     let tileset: Tileset
     
     init(tilemap: IsometricTilemap, data: [[Int]], tileset: Tileset) {
+        self.chunkedLayerData = [CGPointZero: data]
         self.tilemap = tilemap
-        self.layerData = data
         self.tileset = tileset
         
         super.init()
         
-        buildLayer()
+        // built starting chunk at (0,0)
+        buildLayerForChunk(CGPointZero)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func buildNewChunk(chunk: CGPoint, layerData: [[Int]]) {
+        chunkedLayerData[chunk] = layerData
+        buildLayerForChunk(chunk)
     }
     
     /**
@@ -35,11 +41,19 @@ class SpriteLayer: SKNode {
      * generated based on the tile type in the layerData. Sprites are positioned
      * based on their position in the layerData array.
      */
-    func buildLayer() {
+    func buildLayerForChunk(chunk: CGPoint) {
+        guard let layerData = chunkedLayerData[chunk] else {
+            abort()
+        }
+        
         for i in 0..<layerData.count {
             for j in 0..<layerData[i].count {
                 if let node = tileset[layerData[i][j]]?.spriteNode() {
-                    node.position = tilemap.positionForPoint(CGPoint(x: j, y: i))
+                    // convert the array position to global coordinates
+                    let chunkPosition = IsometricTilemap.translateFromChunkPosition(CGPoint(x: j, y: i), chunk: chunk)
+                    // calculate position in SKNode
+//                    node.position = tilemap.positionForPoint(CGPoint(x: j, y: i))
+                    node.position = tilemap.positionForPoint(chunkPosition)
                     // zPosition based on how far down the screen the sprite is
                     node.zPosition = tilemap.tilemapSize.height - node.position.y
                     
@@ -48,4 +62,15 @@ class SpriteLayer: SKNode {
             }
         }
     }
+}
+
+extension CGPoint: Hashable {
+    public var hashValue: Int {
+        return self.x.hashValue << sizeof(CGFloat) ^ self.y.hashValue
+    }
+}
+
+// Hashable requires Equatable, so define the equality function for CGPoints.
+public func ==(lhs: CGPoint, rhs: CGPoint) -> Bool {
+    return CGPointEqualToPoint(lhs, rhs)
 }
