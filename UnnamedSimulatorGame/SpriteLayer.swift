@@ -16,15 +16,12 @@ class SpriteLayer: SKNode {
     var layerData: [CGPoint: [[Int]]]
     let tileset: Tileset
     
-    init(tilemap: IsometricTilemap, data: [[Int]], tileset: Tileset) {
+    init(tilemap: IsometricTilemap, tileset: Tileset) {
         self.layerData = [:]
         self.tilemap = tilemap
         self.tileset = tileset
         
         super.init()
-        
-        // built starting chunk at (0,0)
-        buildChunk(CGPointZero, data: data)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -4,7 +4,6 @@
  
  http://staffwww.itn.liu.se/~stegu/simplexnoise/SimplexNoise.java
  
- 
  This is free and unencumbered software released into the public domain.
  
  Anyone is free to copy, modify, publish, use, compile, sell, or

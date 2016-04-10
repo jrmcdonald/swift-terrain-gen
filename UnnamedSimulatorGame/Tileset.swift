@@ -72,6 +72,29 @@ struct Tileset {
         }
     }
     
+    func getTileForMarch(march: Int, layer: MapConstants.Layers) -> Int {
+        var tilesInRange = [Int]()
+        
+        for (id, tile) in tiles {
+            guard let tileLayer = tile["layer"],
+                let marchAttr = tile["marchValue"],
+                let marchValue = Int(marchAttr) else {
+                    continue
+            }
+            
+            if tileLayer == layer.rawValue && marchValue == march {
+                tilesInRange.append(id)
+            }
+        }
+        
+        if tilesInRange.count > 0 {
+            return tilesInRange[0]
+        } else {
+            print("No tiles matching march value.")
+            return 0
+        }
+    }
+    
     subscript(tileType: Int) -> Tile? {
         get {
             return tiles[tileType]

@@ -72,4 +72,14 @@ class IsometricTilemap: SKNode {
         
         return CGPoint(x: dX + x, y: dY + y)
     }
+    
+    static func translateToChunkPosition(point: CGPoint, chunk: CGPoint) -> CGPoint {
+        let dX = chunk.x * MapConstants.chunkSize.width
+        let dY = chunk.y * MapConstants.chunkSize.height
+        
+        let x = chunk.x < 0 ? -MapConstants.chunkSize.width - (point.x + 1) : point.x
+        let y = chunk.y < 0 ? -MapConstants.chunkSize.height - (point.y + 1) : point.y
+        
+        return CGPoint(x: x - dX, y: y - dY)
+    }
 }
